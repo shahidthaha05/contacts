@@ -1,0 +1,154 @@
+<!-- contacts/templates/contacts/add_contact.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Contact</title>
+    
+
+
+</head>
+<body>
+    <style>
+        
+
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f7fc;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+    margin-top: 20px;
+}
+
+/* Form Title */
+h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+/* Form Group */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+    color: #333;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+.form-group button {
+    width: 100%;
+    padding: 12px;
+    background-color: #4CAF50;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.form-group button:hover {
+    background-color: #45a049;
+}
+
+/* Error Message */
+.error {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+/* Back Button */
+.btn-back {
+    display: inline-block;
+    padding: 12px 20px;
+    background-color: #008CBA;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 16px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.btn-back:hover {
+    background-color: #007bb5;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        width: 90%;
+    }
+
+    .form-group input, .form-group button {
+        font-size: 14px;
+    }
+}
+
+    </style>
+
+    <div class="container">
+        <h2>Add New Contact</h2>
+
+        <form method="POST">
+            {% csrf_token %}
+            
+            <div class="form-group">
+                <label for="{{ form.name.id_for_label }}">Name</label>
+                {{ form.name }}
+                {% for error in form.name.errors %}
+                    <p class="error">{{ error }}</p>
+                {% endfor %}
+            </div>
+            
+            <div class="form-group">
+                <label for="{{ form.phone_number.id_for_label }}">Phone Number</label>
+                {{ form.phone_number }}
+                {% for error in form.phone_number.errors %}
+                    <p class="error">{{ error }}</p>
+                {% endfor %}
+            </div>
+           
+            
+
+         
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-submit">Add Contact</button>
+            </div>
+        </form>
+
+        <p><a href="{% url 'contact_list' %}" class="btn btn-back">Back to Contact List</a></p>
+    </div>
+
+</body>
+</html>
