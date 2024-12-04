@@ -22,8 +22,8 @@ def register(request):
 
 
 
-def chrome_login(req):
-    if 'chrome' in req.session:
+def user_login(req):
+    if 'user' in req.session:
         return redirect('contact_list')
     
     if req.method=='POST':
@@ -33,7 +33,7 @@ def chrome_login(req):
         if data:
             if data.is_superuser:
                 login(req,data)
-                req.session['chrome']=uname   #create session
+                req.session['user']=uname   #create session
                 return redirect('contact_list')
             else:
                 
@@ -42,7 +42,7 @@ def chrome_login(req):
                 return redirect('contact_list')
         else:
             messages.warning(req,'Invalid username or password.')
-            return redirect(chrome_login)
+            return redirect(user_login)
     else:
         return render(req,'contacts/login.html')
 
